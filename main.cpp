@@ -27,6 +27,7 @@ void setData(string names[10], unsigned int scores[10][5]);
 // the function below calculates the average test score and grade. It uses function gradeIt to estimate a letter grade. I have decided to divide this function into two functions to simplify my code and make it easier to read and manage. Hope it is okay.
 float calculateAverage(unsigned int scores[10][5], char grades[10], int index);
 char gradeIt(unsigned int averageGrade);
+float classAverage(unsigned int scores[10][5]);
 
 // the function below displays all the data
 void display_results( string names[10], unsigned int scores[10][5], char grades[10]);
@@ -90,6 +91,7 @@ float calculateAverage(unsigned int scores[10][5], char grades[10], int index){
           sum+=scores[index][j];
       }
 
+//when display_results function requests average grade for a specific student, this function returns it, and also sets a letter grade for the student (it alters "grades" array)
 average = sum / 5.0;
 grades[index] = gradeIt(average);
 
@@ -97,6 +99,7 @@ grades[index] = gradeIt(average);
 };
 
 char gradeIt(unsigned int everageGrade){
+
 
   if(everageGrade >= 90 ){
     return  'A';
@@ -113,6 +116,21 @@ char gradeIt(unsigned int everageGrade){
   }
 }
 
+float classAverage(unsigned int scores[10][5]){
+
+  float class_average {0};
+  unsigned int sum {0};
+
+  for(int i{0}; i < 10; i++){
+    for(int j {0}; j < 5; j++){
+      sum+=scores[i][j];
+    }
+  }
+ class_average = sum / 50.0;
+  return class_average;
+}
+
+//all the magic of displaying data happens here
 void display_results( string names[10], unsigned int scores[10][5], char grades[10]){
   
   cout << "--------------------------------------------------------------------------------" << endl;
@@ -132,6 +150,7 @@ cout << "-----------------------------------------------------------------------
 
   }
   cout << "--------------------------------------------------------------------------------" << endl;
+  cout<< "Class Average: " << classAverage(scores) << " / " << gradeIt(classAverage(scores)) << endl;
   cout << "--------------------------------------------------------------------------------" << endl;
   
 }
